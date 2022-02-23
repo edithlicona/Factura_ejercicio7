@@ -1,0 +1,75 @@
+#include <iostream>
+#include <stdlib.h>
+
+#define COSTE1 200
+#define COSTE2 150
+#define COSTE3 80
+
+int main(int argc, char** argv) 
+{
+ bool salir = false;
+ char tecla;
+ int totalproductos = 0, producto1 = 0, producto2 = 0, producto3 = 0;
+ int dinero = 0;
+ int descuento = 0;
+ 
+ while(!salir)
+ {
+  std::cout << "Introduzca codigo de producto (1,2,3) o cualquier otra tecla para finalizar la compra: ";
+  std::cin >> tecla;
+  
+  switch (tecla)
+  {
+   case '1':
+    producto1++;
+   break;
+   
+   case '2':
+    producto2++;
+   break;
+   
+   case '3':
+    producto3++;
+   break;
+   
+   default:
+    salir = true;
+   break;
+  }
+ }
+ 
+ dinero = producto1*COSTE1 +  producto2*COSTE2 +  producto3*COSTE3;
+ totalproductos = producto1 + producto2 + producto3;
+ 
+ std::cout << "FACTURA:";
+ std::cout << "    " << producto1 << " unidades a " << COSTE1 << std::endl;
+ std::cout << "    " << producto2 << " unidades a " << COSTE2 << std::endl;
+ std::cout << "    " << producto3 << " unidades a " << COSTE3 << std::endl;
+ std::cout << " Unidades totales compradas: " << totalproductos << std::endl;
+
+ std::cout << "SUBTOTAL ANTES DE DESCUENTOS: " << dinero << std::endl;
+ if (totalproductos > 20)
+ {
+  descuento = dinero/10;
+  std::cout << "Descuento aplicable del 10% = -" << descuento << std::endl;
+ }
+ else if (totalproductos > 10)
+  {
+   descuento = dinero/20;
+   std::cout << "Descuento aplicable del 5% = -" << descuento << std::endl;
+  }
+  else
+  {
+   descuento = 0;
+   std::cout << "Sin descuentos aplicables = -0" << std::endl;
+  }
+  
+ dinero -= descuento;
+ std::cout << "SUBTOTAL DESPUES DE DESCUENTOS: " << dinero << std::endl;
+ 
+ dinero *= 1.21;
+ std::cout << "TOTAL A PAGAR (IVA INCLUIDO): " << dinero << std::endl;
+ 
+ system("pause");  
+ return 0;
+}
